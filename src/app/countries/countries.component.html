@@ -1,0 +1,14 @@
+
+<div class="countriesListClass">
+    <div *ngFor="let continent of continentsGroup">
+        <div class="continentClass">
+            <h3><span class="title">{{continent.region}}</span></h3>
+            <div  *ngFor="let country of continent.countries">
+                <div class="countryClass" matTooltip="Show Detail" (click)="showCountryDetail(country)">
+                    <span class="flagClass"><img width="30px" height="20px" [src]="country.flag"></span>
+                    <span>{{country.name}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+.countriesListClass{
+    overflow: auto;
+    height: calc(100% - 100px);
+}
+
+.continentClass{
+    float: left;
+    width: 220px;
+    margin: 8px;
+}
+
+.countryClass{
+    cursor: pointer;
+}
+
+.flagClass{
+    margin-right: 5px;
+}
