@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CountryDetailComponent } from '../country-detail/country-detail.component';
 import { GlobalDataService } from  '@shared/services/globalData';
@@ -15,7 +15,7 @@ import { DATA } from '@shared/services/constantsService';
   styleUrls: ['./countries.component.scss'],
   providers: [GeneralService]
 })
-export class CountriesComponent implements OnInit {
+export class CountriesComponent implements OnInit, OnDestroy {
   /**
    * Variable que mantiene un backup del resultado obtenido al llamar al endpoint paises
    */
