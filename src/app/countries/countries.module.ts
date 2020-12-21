@@ -8,11 +8,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   declarations: [CountriesComponent],
   imports: [
     CommonModule,
-    MatTooltipModule
+    MatTooltipModule,
   ],
   exports: [
     CountriesComponent, 
-    MatTooltipModule
-  ]
+    MatTooltipModule,
+  ],
+  providers:[]
 })
 export class CountriesModule { }

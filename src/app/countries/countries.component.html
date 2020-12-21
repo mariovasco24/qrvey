@@ -1,14 +1,47 @@
 
 <div class="countriesListClass">
-    <div *ngFor="let continent of continentsGroup">
+    <ng-container *ngFor="let continent of continentsGroup">
         <div class="continentClass">
             <h3><span class="title">{{continent.region}}</span></h3>
-            <div  *ngFor="let country of continent.countries">
-                <div class="countryClass" matTooltip="Show Detail" (click)="showCountryDetail(country)">
+            <ng-container  *ngFor="let country of continent.countries">
+                <div class="countryClass" (click)="showCountryDetail(country)">
                     <span class="flagClass"><img width="30px" height="20px" [src]="country.flag"></span>
                     <span>{{country.name}}</span>
                 </div>
-            </div>
+            </ng-container>
         </div>
+    </ng-container>
+</div>
+
+<div class="backgroundModal" *ngIf="showModal"></div>
+<div class="modal" *ngIf="showModal">
+    <div class="closeModalClass" (click)="closeModal()">x</div>
+    <h1>
+        <span class="title">{{selectedCountry.name}}</span>
+        <span class="favoriteClass" (click)="saveFavorite(selectedCountry)"><i [class]="getFavoriteStatus(selectedCountry)?'favoriteOn':'favoriteOff'" aria-hidden="true" class="fa fa-star"></i></span>
+    </h1>
+    <span class="flagSpanClass"><img class="flag" [src]="selectedCountry.flag"></span>
+    <p><span class="title">Region:</span> {{selectedCountry.region}}</p>
+    <p><span class="title">Population:</span> {{selectedCountry.population | number}}</p>
+    <p><span class="title">Capital:</span> {{selectedCountry.capital}}</p>
+    <ng-container>
+        <span class="title">Currency:</span> 
+        <div class="subItemsClass" *ngFor="let c of selectedCountry.currencies">
+            <span>Code: {{c.code}} </span>
+            <span>Name: {{c.name}} </span>
+            <span>Symbol: {{c.symbol}}</span>
+        </div>
+    </ng-container>
+    <div>
+        <span class="title">Languages:</span> 
+        <span *ngFor="let l of selectedCountry.languages; index as i">
+            {{l.nativeName}}{{selectedCountry.languages.length - 1 != i?',':'.'}}
+        </span>
+    </div>
+    <div *ngIf="selectedCountry.borders.length > 0">
+        <span class="title">Border Countries:</span> 
+        <span *ngFor="let border of selectedCountry.borders; index as i">
+            {{getBorderCountryFullName(border)}}{{selectedCountry.borders.length - 1 != i?',':'.'}}
+        </span>
     </div>
 </div>

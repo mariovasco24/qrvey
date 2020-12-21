@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CountryDetailComponent } from '../country-detail/country-detail.component';
 import { GlobalDataService } from  '@shared/services/globalData';
 import { GeneralService } from '@shared/services/generalServices';
 import { Subscription } from 'rxjs';
@@ -40,6 +39,10 @@ export class CountriesComponent implements OnInit, OnDestroy {
    * Variable que permite manejar las suscripcion al llamado http del endpoint (paises)
    */
   private subscriptionGetCountries: Subscription;
+
+  public selectedCountry:object = {name:'', languages: [], borders:[]};
+
+  public showModal = false;
 
   /**
    * Constructor
@@ -140,10 +143,47 @@ export class CountriesComponent implements OnInit, OnDestroy {
    * @param country Objeto pais del cual se requiere mostrar el detalle
    */
   showCountryDetail(country: object): void {
-    this.dialog.open(CountryDetailComponent, {
-      width: '550px',
-      data: {country: country, dataResultApiBackup: this.dataResultApiBackup}
-    });
+    this.selectedCountry = country;
+    this.showModal = true;
+  }
+
+  /**
+   * Obtiene el nombre completo de la frontera
+   * @param alpha3Code Codigo de identificador del pais (alpha3)
+   * @returns Nombre completo del pais fronterizo
+   */
+  getBorderCountryFullName(alpha3Code: string): string {
+    return this.dataResultApiBackup.filter(data => data.alpha3Code == alpha3Code)[0].name;
+  }
+
+  /**
+   * Guarda en storage el pais seleccionado como favorito
+   * @param country Objeto pais del que se quiere guardar en favorito
+   */  
+  saveFavorite(country): void{
+    if(!country.favorite){
+      country.favorite = true;
+      localStorage.setItem(country.alpha3Code, 'true');
+    }else{
+      country.favorite = !country.favorite;
+      localStorage.setItem(country.alpha3Code, 'false');
+    }
+  }
+
+  /**
+   * Valida si el pais seleccionado se encuentra registrado como favorito
+   * @param country Objeto pais del que se quiere validar si se encuentra como favorito
+   * @returns Nombre del icono que representa si el país se encuentra marcado como favorito o no
+   */
+  getFavoriteStatus(country): boolean{
+    if(localStorage.getItem(country.alpha3Code) && localStorage.getItem(country.alpha3Code) === 'true'){
+      return true;
+    }
+    return false;
+  }
+
+  closeModal(){
+    this.showModal = false;
   }
 
 }

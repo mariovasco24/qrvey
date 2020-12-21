@@ -3,9 +3,10 @@
     height: 100px;
 }
 
-.fieldSearchClass{
+.inputSearch{
     margin: 25px;
     width: 40%;
+    height: 30px;
 }
 
 .qrveyTestLabelClass{
@@ -13,4 +14,9 @@
     top:0px; 
     right: 5px; 
     color: white;
+}
+
+.iconInput{
+    position: relative;
+    left: calc(40% + 20px);
 }
