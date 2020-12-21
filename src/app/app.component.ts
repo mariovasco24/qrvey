@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GlobalDataService } from  '@shared/services/globalData';
 import { Subscription } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, OnDestroy{
   
   /**
    * Variable que permite manejar si se muestra o no el Spinner (Loading)
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit{
   public showSpinner:boolean = false;
 
   /**
-   * Variable que permite manejar las suscripciones a observables
+   * Variable que permite manejar las suscripciones a observables para el Spinner
    */
   private subscriptionSpinner: Subscription;
 
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit{
   }
 
   /**
-   * Metodo que permite manejar las suscripciones del componente
+   * Metodo que permite manejar las suscripciones del componente Spinner
    */
   subscribes(): void{
     this.subscriptionSpinner = this._globalDataService.getData('spinner').subscribe(data => {

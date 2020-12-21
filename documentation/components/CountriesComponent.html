@@ -78,6 +78,7 @@
     </p>
     <p class="comment">
                     <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
     </p>
 
 
@@ -975,7 +976,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
 import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
 import { CountryDetailComponent } from &#x27;../country-detail/country-detail.component&#x27;;
 import { GlobalDataService } from  &#x27;@shared/services/globalData&#x27;;
@@ -992,7 +993,7 @@ import { DATA } from &#x27;@shared/services/constantsService&#x27;;
   styleUrls: [&#x27;./countries.component.scss&#x27;],
   providers: [GeneralService]
 })
-export class CountriesComponent implements OnInit {
+export class CountriesComponent implements OnInit, OnDestroy {
   /**
    * Variable que mantiene un backup del resultado obtenido al llamar al endpoint paises
    */

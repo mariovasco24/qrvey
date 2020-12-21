@@ -24,13 +24,13 @@
 <title>cluster_CountryDetailModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="90,-70 90,-268 406,-268 406,-70 90,-70"/>
 </g>
-<g id="clust5" class="cluster">
-<title>cluster_CountryDetailModule_exports</title>
-<polygon fill="none" stroke="black" points="98,-208 98,-260 398,-260 398,-208 98,-208"/>
-</g>
 <g id="clust2" class="cluster">
 <title>cluster_CountryDetailModule_declarations</title>
 <polygon fill="none" stroke="black" points="158,-78 158,-130 336,-130 336,-78 158,-78"/>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_CountryDetailModule_exports</title>
+<polygon fill="none" stroke="black" points="98,-208 98,-260 398,-260 398,-208 98,-208"/>
 </g>
 <!-- CountryDetailComponent -->
 <g id="node1" class="node">

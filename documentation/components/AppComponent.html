@@ -78,6 +78,7 @@
     </p>
     <p class="comment">
                     <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
     </p>
 
 
@@ -354,7 +355,7 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Metodo que permite manejar las suscripciones del componente</p>
+                    <div class="io-description"><p>Metodo que permite manejar las suscripciones del componente Spinner</p>
 </div>
 
                     <div class="io-description">
@@ -437,7 +438,7 @@
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Variable que permite manejar las suscripciones a observables</p>
+                        <div class="io-description"><p>Variable que permite manejar las suscripciones a observables para el Spinner</p>
 </div>
                     </td>
                 </tr>
@@ -450,7 +451,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
 import { GlobalDataService } from  &#x27;@shared/services/globalData&#x27;;
 import { Subscription } from &#x27;rxjs&#x27;;
 
@@ -462,7 +463,7 @@ import { Subscription } from &#x27;rxjs&#x27;;
   templateUrl: &#x27;./app.component.html&#x27;,
   styleUrls: [&#x27;./app.component.scss&#x27;]
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, OnDestroy{
   
   /**
    * Variable que permite manejar si se muestra o no el Spinner (Loading)
@@ -470,7 +471,7 @@ export class AppComponent implements OnInit{
   public showSpinner:boolean &#x3D; false;
 
   /**
-   * Variable que permite manejar las suscripciones a observables
+   * Variable que permite manejar las suscripciones a observables para el Spinner
    */
   private subscriptionSpinner: Subscription;
 
@@ -488,7 +489,7 @@ export class AppComponent implements OnInit{
   }
 
   /**
-   * Metodo que permite manejar las suscripciones del componente
+   * Metodo que permite manejar las suscripciones del componente Spinner
    */
   subscribes(): void{
     this.subscriptionSpinner &#x3D; this._globalDataService.getData(&#x27;spinner&#x27;).subscribe(data &#x3D;&gt; {
