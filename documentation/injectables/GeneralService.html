@@ -83,6 +83,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#get">get</a>
                             </li>
                         </ul>
@@ -197,6 +198,7 @@
                     <a name="get"></a>
                     <span class="name">
                         <b>
+                            <span class="modifier">Async</span>
                             get
                         </b>
                         <a href="#get"><span class="icon ion-ios-link"></span></a>
@@ -205,7 +207,8 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>get(route: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, params?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>get(route: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, params?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
@@ -273,7 +276,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+                        <b>Returns : </b>    <code>Promise&lt;Observable&lt;any&gt;&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -317,7 +320,7 @@ export class GeneralService {
      * @param params Parametros adicionales que se desean enviar en el GET
      * @returns Retorna un Observable
      */
-    get(route: string, params?:any): Observable&lt;any&gt;{
+    async get(route: string, params?:any): Promise&lt;Observable&lt;any&gt;&gt;{
       this.globalDataService.setData(&#x27;spinner&#x27;,true);
       let stringParams&#x3D;&#x27;&#x27;;
       if(params !&#x3D; undefined){

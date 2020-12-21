@@ -6,6 +6,7 @@
     "paths": {
       "@shared/services/globalData":["app/shared/services/globalData.service.ts"],
       "@shared/services/generalServices":["app/shared/services/GeneralServices.service.ts"],
+      "@shared/services/constantsService":["app/shared/services/constants.service.ts"],
       "@shared/module/sharedModule":["app/shared/shared.module.ts"]
     },
     "outDir": "./dist/out-tsc",
@@ -26,7 +27,6 @@
     "src/test.ts",
     "src/environments/environment.ts",
     "src/environments/environment.prod.ts",
-    "src/**/*.spec.ts",
     "e2e/src/app.po.ts"
   ]
 }

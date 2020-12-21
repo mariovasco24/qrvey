@@ -13,7 +13,7 @@ export class CountryDetailComponent{
   /**
    * Array obtenido de la peticion realizada al endpoint de paises
    */
-  private dataResultApiBackup;
+  public dataResultApiBackup;
 
   /**
    * Objeto pais

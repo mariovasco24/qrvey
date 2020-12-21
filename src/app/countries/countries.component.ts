@@ -4,6 +4,7 @@ import { CountryDetailComponent } from '../country-detail/country-detail.compone
 import { GlobalDataService } from  '@shared/services/globalData';
 import { GeneralService } from '@shared/services/generalServices';
 import { Subscription } from 'rxjs';
+import { DATA } from '@shared/services/constantsService';
 
 /**
  * Componente pais maneja y administra el listado de los paises obtenidos por medio del llamado al endpoint de paises
@@ -31,9 +32,14 @@ export class CountriesComponent implements OnInit {
   public countryFilter: string = '';
 
   /**
-   * Variable que permite manejar las suscripciones a observables
+   * Variable que permite manejar las suscripcion del campo busqueda
    */
   private subscriptionSearch: Subscription;
+
+  /**
+   * Variable que permite manejar las suscripcion al llamado http del endpoint (paises)
+   */
+  private subscriptionGetCountries: Subscription;
 
   /**
    * Constructor
@@ -64,22 +70,23 @@ export class CountriesComponent implements OnInit {
   }
 
   /**
-   * Cuando se destruya el componente realiza el unsubscribe de los eventos para optimizar el rendimiento de la aplicación
-   */
-  ngOnDestroy() {
-    this.subscriptionSearch.unsubscribe();
-  }
-
-  /**
    * Realiza el llamado al endpoint obteniendo el listado de paises
    */
-  countriesLoad(): void {
-    this._generalService.get('AllCountries').subscribe(
+  async countriesLoad(): Promise<void> {
+    this.subscriptionGetCountries = (await this._generalService.get(DATA.AllCountries)).subscribe(
       result => {
         this.continentsGroup = this.countriesGroup(result);
         this.dataResultApiBackup = result;
       }
     ); 
+  }
+
+  /**
+   * Cuando se destruya el componente realiza el unsubscribe de los eventos para optimizar el rendimiento de la aplicación
+   */
+  ngOnDestroy() {
+    this.subscriptionSearch.unsubscribe();
+    this.subscriptionGetCountries.unsubscribe();
   }
 
   /**

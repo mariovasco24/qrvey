@@ -25,7 +25,7 @@ export class GeneralService {
      * @param params Parametros adicionales que se desean enviar en el GET
      * @returns Retorna un Observable
      */
-    get(route: string, params?:any): Observable<any>{
+    async get(route: string, params?:any): Promise<Observable<any>>{
       this.globalDataService.setData('spinner',true);
       let stringParams='';
       if(params != undefined){

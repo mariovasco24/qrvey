@@ -1,4 +1,5 @@
 import {Injectable} from "@angular/core";
+import { DATA } from '@shared/services/constantsService';
 /**
  * Configuacion principal de la aplicacion
  */
@@ -20,7 +21,7 @@ export class RoutesServices{
 	 */
 	urlWebService(endPoint:string): string{
 		switch (endPoint) {
-			case "AllCountries":
+			case DATA.AllCountries:
 				return this.url+"/all";
 		}	
 	}

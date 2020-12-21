@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CountriesComponent } from './countries.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import {HttpClientModule} from '@angular/common/http';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -16,7 +15,7 @@ describe('CountriesComponent', () => {
     providers: [MatSnackBar]
   }));
 
-  it(`should order the continents`, () => {
+  it(`should order the array`, () => {
     const fixture = TestBed.createComponent(CountriesComponent);
     const app = fixture.componentInstance;
 
@@ -27,6 +26,23 @@ describe('CountriesComponent', () => {
     expect(results[2]["region"]).toEqual('Asia');
     expect(results[3]["region"]).toEqual('Europe');
     expect(results[4]["region"]).toEqual('Oceania');
+  });
+
+  it(`should be array`, () => {
+    const fixture = TestBed.createComponent(CountriesComponent);
+    const app = fixture.componentInstance;
+
+    expect(Array.isArray(app.dataResultApiBackup)).toBeTrue;
+    
+  });
+
+  it(`should be filter`,  () => {
+    const fixture = TestBed.createComponent(CountriesComponent);
+    const app = fixture.componentInstance;
+    app.dataResultApiBackup = [{name:'Colombia'},{name:'Argentina'},{name:'Brazil'},{name:'Ecuador'},{name:'Canada'}]
+    app.countryFilter = 'arg';
+    app.countriesFilter();
+    expect(app.continentsGroup[0].countries[0].name).toEqual('Argentina');
   });
 
 
