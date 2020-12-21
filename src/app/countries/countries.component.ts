@@ -146,19 +146,17 @@ export class CountriesComponent implements OnInit, OnDestroy {
     this.showModal = true;
   }
 
+  /**
+   * Devuelve una cadena Json con los datos de los paises obtenidos en el endpoint
+   */
   getDataResultApi(): string{
     return JSON.stringify(this.dataResultApiBackup);
   }
-  /**
-   * Obtiene el nombre completo de la frontera
-   * @param alpha3Code Codigo de identificador del pais (alpha3)
-   * @returns Nombre completo del pais fronterizo
-   */
-  getBorderCountryFullName(alpha3Code: string): string {
-    return this.dataResultApiBackup.filter(data => data.alpha3Code == alpha3Code)[0].name;
-  }
 
-  closeModal(){
+  /**
+   * Permite cerrar el modal detalle pais
+   */
+  closeModal(): void{
     this.showModal = false;
   }
 
