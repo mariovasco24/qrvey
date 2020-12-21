@@ -4,7 +4,6 @@ import { GlobalDataService } from  '@shared/services/globalData';
 import { GeneralService } from '@shared/services/generalServices';
 import { Subscription } from 'rxjs';
 import { DATA } from '@shared/services/constantsService';
-
 /**
  * Componente pais maneja y administra el listado de los paises obtenidos por medio del llamado al endpoint de paises
  */
@@ -147,6 +146,9 @@ export class CountriesComponent implements OnInit, OnDestroy {
     this.showModal = true;
   }
 
+  getDataResultApi(): string{
+    return JSON.stringify(this.dataResultApiBackup);
+  }
   /**
    * Obtiene el nombre completo de la frontera
    * @param alpha3Code Codigo de identificador del pais (alpha3)
@@ -154,32 +156,6 @@ export class CountriesComponent implements OnInit, OnDestroy {
    */
   getBorderCountryFullName(alpha3Code: string): string {
     return this.dataResultApiBackup.filter(data => data.alpha3Code == alpha3Code)[0].name;
-  }
-
-  /**
-   * Guarda en storage el pais seleccionado como favorito
-   * @param country Objeto pais del que se quiere guardar en favorito
-   */  
-  saveFavorite(country): void{
-    if(!country.favorite){
-      country.favorite = true;
-      localStorage.setItem(country.alpha3Code, 'true');
-    }else{
-      country.favorite = !country.favorite;
-      localStorage.setItem(country.alpha3Code, 'false');
-    }
-  }
-
-  /**
-   * Valida si el pais seleccionado se encuentra registrado como favorito
-   * @param country Objeto pais del que se quiere validar si se encuentra como favorito
-   * @returns Nombre del icono que representa si el país se encuentra marcado como favorito o no
-   */
-  getFavoriteStatus(country): boolean{
-    if(localStorage.getItem(country.alpha3Code) && localStorage.getItem(country.alpha3Code) === 'true'){
-      return true;
-    }
-    return false;
   }
 
   closeModal(){

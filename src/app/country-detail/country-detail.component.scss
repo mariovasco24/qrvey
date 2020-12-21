@@ -1,0 +1,30 @@
+.flagSpanClass{
+    position: absolute;
+    top: 50px;
+    right: 20px;
+}
+
+.flag{
+    max-height: 100px;
+    outline: solid;
+    outline-width: 1px;
+}
+
+.subItemsClass{
+    margin-left: 20px;
+}
+
+.favoriteClass{
+    cursor: pointer;
+    color: red;
+    margin-left: 10px;
+}
+
+
+.favoriteOff{
+    color: rgb(192, 192, 189);
+}
+
+.favoriteOn{
+    color: #FCB35B;
+}

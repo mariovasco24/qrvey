@@ -1,0 +1,28 @@
+    <h1>
+        <span class="title">{{country.name}}</span>
+        <span class="favoriteClass" (click)="saveFavorite(country)"><i [class]="getFavoriteStatus(country)?'favoriteOn':'favoriteOff'" aria-hidden="true" class="fa fa-star"></i></span>
+    </h1>
+    <span class="flagSpanClass"><img class="flag" [src]="country.flag"></span>
+    <p><span class="title">Region:</span> {{country.region}}</p>
+    <p><span class="title">Population:</span> {{country.population | number}}</p>
+    <p><span class="title">Capital:</span> {{country.capital}}</p>
+    <ng-container>
+        <span class="title">Currency:</span> 
+        <div class="subItemsClass" *ngFor="let c of country.currencies">
+            <span>Code: {{c.code}} </span>
+            <span>Name: {{c.name}} </span>
+            <span>Symbol: {{c.symbol}}</span>
+        </div>
+    </ng-container>
+    <div>
+        <span class="title">Languages:</span> 
+        <span *ngFor="let l of country.languages; index as i">
+            {{l.nativeName}}{{country.languages.length - 1 != i?',':'.'}}
+        </span>
+    </div>
+    <div *ngIf="country.borders.length > 0">
+        <span class="title">Border Countries:</span> 
+        <span *ngFor="let border of country.borders; index as i">
+            {{getBorderCountryFullName(border)}}{{country.borders.length - 1 != i?',':'.'}}
+        </span>
+    </div>

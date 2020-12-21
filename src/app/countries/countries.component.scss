@@ -19,10 +19,11 @@
 
 .modal{    
     position: fixed;
-    width: 550px;
+    width: 600px;
+    height: 250px;
     background-color: white;
-    top: calc(50% - 200px);
-    left: calc(50% - 280px);
+    top: calc(50% - 125px);
+    left: calc(50% - 300px);
     padding: 35px;
 }
 
@@ -44,14 +45,14 @@
 
 .favoriteClass{
     cursor: pointer;
-    color: red;
 }
 
 .closeModalClass{
     position: absolute;
     right: 0px;
     margin-top: 5px;
-    font-size: 25px;
+    font-size: 20px;
+    color: gray;
     margin-right: 20px;
     cursor: pointer;
     top: 6px;
@@ -64,12 +65,4 @@
     background-color: gray;
     top: 1px;
     opacity: 0.5;
-}
-
-.favoriteOff{
-    color: rgb(192, 192, 189);
-}
-
-.favoriteOn{
-    color: #FCB35B;
 }

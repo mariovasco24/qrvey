@@ -354,13 +354,13 @@ export class HeaderComponent{
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bannerSearch&quot;&gt;
-    &lt;mat-form-field class&#x3D;&quot;fieldSearchClass&quot; appearance&#x3D;&quot;legacy&quot; &gt;
-        &lt;mat-label&gt;Search&lt;/mat-label&gt;
-        &lt;input autocomplete&#x3D;&quot;off&quot; [(ngModel)]&#x3D;&quot;countryFilter&quot; (change)&#x3D;&quot;countriesFilter()&quot; matInput&gt;
-        &lt;mat-icon matSuffix&gt;search&lt;/mat-icon&gt;
-    &lt;/mat-form-field&gt;
-&lt;/div&gt;
-&lt;div class&#x3D;&quot;qrveyTestLabelClass&quot;&gt;Qrvey Test - Mario David Vasco Villareal&lt;/div&gt;</code></pre>
+    &lt;div&gt;
+        &lt;span class&#x3D;&quot;iconInput&quot;&gt;&lt;i class&#x3D;&quot;fa fa-search&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+        &lt;input class&#x3D;&quot;inputSearch&quot; autocomplete&#x3D;&quot;off&quot; [(ngModel)]&#x3D;&quot;countryFilter&quot; placeholder&#x3D;&quot;Search&quot; (keyup)&#x3D;&quot;countriesFilter()&quot;&gt;
+    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;div class&#x3D;&quot;qrveyTestLabelClass&quot;&gt;Qrvey Test - Mario David Vasco Villareal&lt;/div&gt;
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
@@ -372,9 +372,10 @@ export class HeaderComponent{
     height: 100px;
 }
 
-.fieldSearchClass{
+.inputSearch{
     margin: 25px;
     width: 40%;
+    height: 30px;
 }
 
 .qrveyTestLabelClass{
@@ -382,6 +383,11 @@ export class HeaderComponent{
     top:0px; 
     right: 5px; 
     color: white;
+}
+
+.iconInput{
+    position: relative;
+    left: calc(40% + 20px);
 }</code></pre>
     </div>
 
@@ -410,8 +416,8 @@ export class HeaderComponent{
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="bannerSearch">    <mat-form-field class="fieldSearchClass" appearance="legacy" >        <mat-label>Search</mat-label>        <input autocomplete="off" [(ngModel)]="countryFilter" (change)="countriesFilter()" matInput>        <mat-icon matSuffix>search</mat-icon>    </mat-form-field></div><div class="qrveyTestLabelClass">Qrvey Test - Mario David Vasco Villareal</div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CountriesComponent', 'selector': 'app-countries'},{'name': 'CountryDetailComponent', 'selector': 'app-country-detail'},{'name': 'HeaderComponent', 'selector': 'app-header'}];
+        var COMPONENT_TEMPLATE = '<div><div class="bannerSearch">    <div>        <span class="iconInput"><i class="fa fa-search"></i></span>        <input class="inputSearch" autocomplete="off" [(ngModel)]="countryFilter" placeholder="Search" (keyup)="countriesFilter()">    </div>    </div><div class="qrveyTestLabelClass">Qrvey Test - Mario David Vasco Villareal</div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CountriesComponent', 'selector': 'app-countries'},{'name': 'HeaderComponent', 'selector': 'app-header'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HeaderComponent'};
 </script>
