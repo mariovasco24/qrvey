@@ -10,7 +10,7 @@ import { HeaderModule } from '../app/shared/components/header/header.module';
 import { CountryDetailModule } from '../app/country-detail/country-detail.module';
 import { CountriesModule } from '../app/countries/countries.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [

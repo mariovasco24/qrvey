@@ -21,5 +21,12 @@
       "es2018",
       "dom"
     ]
-  }
+  },
+  "exclude": [
+    "src/test.ts",
+    "src/environments/environment.ts",
+    "src/environments/environment.prod.ts",
+    "src/**/*.spec.ts",
+    "e2e/src/app.po.ts"
+  ]
 }

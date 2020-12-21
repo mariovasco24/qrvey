@@ -3,7 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { CountryDetailComponent } from '../country-detail/country-detail.component';
 import { GlobalDataService } from  '@shared/services/globalData';
 import { GeneralService } from '@shared/services/generalServices';
+import { Subscription } from 'rxjs';
 
+/**
+ * Componente pais maneja y administra el listado de los paises obtenidos por medio del llamado al endpoint de paises
+ */
 @Component({
   selector: 'app-countries',
   templateUrl: './countries.component.html',
@@ -11,19 +15,47 @@ import { GeneralService } from '@shared/services/generalServices';
   providers: [GeneralService]
 })
 export class CountriesComponent implements OnInit {
+  /**
+   * Variable que mantiene un backup del resultado obtenido al llamar al endpoint paises
+   */
   public dataResultApiBackup: any[];
+
+  /**
+   * Variable que mantiene los paises agrupados por continentes
+   */
   public continentsGroup: any[];
+
+  /**
+   * Variable que mantiene el texto ingresado por el usuario para el filtro de busqueda de pais
+   */
   public countryFilter: string = '';
 
+  /**
+   * Variable que permite manejar las suscripciones a observables
+   */
+  private subscriptionSearch: Subscription;
+
+  /**
+   * Constructor
+   * @param _generalService Instancia a la clase global generalService
+   * @param dialog Instancia a la clase dialog de angular material
+   * @param _globalDataService Instancia a la clase GlobalDataService
+   */
   constructor(private _generalService: GeneralService, public dialog: MatDialog, private _globalDataService:GlobalDataService) { }
 
+  /**
+   * Init
+   */
   ngOnInit(): void {
     this.countriesLoad();
     this.subscribes();
   }
 
+  /**
+   * Permite manejar las suscripciones del componente
+   */
   subscribes(): void {
-    this._globalDataService.getData('search').subscribe(data => {
+    this.subscriptionSearch = this._globalDataService.getData('search').subscribe(data => {
       if(data != null){
         this.countryFilter = data;
         this.countriesFilter();
@@ -31,18 +63,29 @@ export class CountriesComponent implements OnInit {
     }); 
   }
 
+  /**
+   * Cuando se destruya el componente realiza el unsubscribe de los eventos para optimizar el rendimiento de la aplicación
+   */
+  ngOnDestroy() {
+    this.subscriptionSearch.unsubscribe();
+  }
+
+  /**
+   * Realiza el llamado al endpoint obteniendo el listado de paises
+   */
   countriesLoad(): void {
     this._generalService.get('AllCountries').subscribe(
       result => {
         this.continentsGroup = this.countriesGroup(result);
         this.dataResultApiBackup = result;
-      },
-      error =>{
-        
       }
     ); 
   }
 
+  /**
+   * Agrupa los datos de paises por continentes
+   * @param result array obtenido del llamado al endpoint de paises
+   */
   countriesGroup(result): object[] {
     let continents = []; 
     let dataArray = [];
@@ -62,6 +105,11 @@ export class CountriesComponent implements OnInit {
     return dataArray;
   }
 
+  /**
+   * Ordena un array de forma ascendente o descendente
+   * @param array array a ordenar
+   * @param type si se quiere ordenar de forma ascendente su valor debe ser 'asc' o si es de forma descendente 'desc'
+   */
   regionOrderName(array, type): object[] {
     if(type === 'asc'){
       return array.sort((a,b) => (a.region > b.region) ? 1 : ((b.region > a.region) ? -1 : 0));
@@ -69,6 +117,9 @@ export class CountriesComponent implements OnInit {
     return array.reverse((a,b) => (a.region > b.region) ? 1 : ((b.region > a.region) ? -1 : 0));
   }
 
+  /**
+   * Permite realiar una busqueda de paises, no es sencible a mayúsculas o minúsculas
+   */
   countriesFilter(): void {
     let dataArray = this.dataResultApiBackup;
     if(this.countryFilter != ''){
@@ -77,6 +128,10 @@ export class CountriesComponent implements OnInit {
     this.continentsGroup = this.countriesGroup(dataArray);
   }
 
+  /**
+   * Permite visualizar en un cuadro modal  información detallada de un pais
+   * @param country Objeto pais del cual se requiere mostrar el detalle
+   */
   showCountryDetail(country: object): void {
     this.dialog.open(CountryDetailComponent, {
       width: '550px',
